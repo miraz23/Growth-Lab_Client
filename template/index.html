@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Lab - Learn New Skills</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-12 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-primary">Growth Lab</a>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-dark hover:text-primary transition">Home</a>
+                    <a href="courses.html" class="text-dark hover:text-primary transition">Courses</a>
+                    <a href="contact.html" class="text-dark hover:text-primary transition">Contact</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-4" id="auth-buttons">
+                    <a href="login.html" class="text-dark hover:text-primary transition">Login</a>
+                    <a href="register.html" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">Register</a>
+                </div>
+                <div class="hidden items-center space-x-4" id="user-menu">
+                    <div class="relative" id="dropdown-container">
+                        <button id="dropdown-button" class="flex items-center space-x-1">
+                            <span id="username">User</span>
+                            <i class="fas fa-chevron-down text-sm"></i>
+                        </button>
+                        <div id="dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden">
+                            <a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                            <a href="instructor-dashboard.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" id="instructor-link">Instructor Dashboard</a>
+                            <a href="#" id="logout-button" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <button class="md:hidden" id="mobile-menu-button">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            <div class="md:hidden hidden" id="mobile-menu">
+                <div class="flex flex-col space-y-3 py-3">
+                    <a href="index.html" class="text-dark hover:text-primary transition">Home</a>
+                    <a href="courses.html" class="text-dark hover:text-primary transition">Courses</a>
+                    <a href="contact.html" class="text-dark hover:text-primary transition">Contact</a>
+                    <div id="mobile-auth-buttons">
+                        <a href="login.html" class="block text-dark hover:text-primary transition mb-2">Login</a>
+                        <a href="register.html" class="block bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600 transition w-full text-center">Register</a>
+                    </div>
+                    <div id="mobile-user-menu" class="hidden">
+                        <a href="profile.html" class="block text-dark hover:text-primary transition">Profile</a>
+                        <a href="instructor-dashboard.html" class="block text-dark hover:text-primary transition" id="mobile-instructor-link">Instructor Dashboard</a>
+                        <a href="#" id="mobile-logout-button" class="block text-dark hover:text-primary transition">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20">
+        <div class="container mx-auto px-12">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 mr-8">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Unlock Your Potential with Growth Lab</h1>
+                    <p class="text-xl mb-8">Discover expert-led courses designed to help you master new skills and advance your career.</p>
+                    <a href="courses.html" class="bg-white text-blue-600 px-6 py-3 rounded-md font-semibold hover:bg-gray-100 transition">Explore Courses</a>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" alt="Students learning" class="rounded-lg shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Courses -->
+    <section class="py-16">
+        <div class="container mx-auto px-12">
+            <h2 class="text-3xl font-bold text-center mb-12">Featured Courses</h2>
+            <div id="featured-courses" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Course cards will be loaded here -->
+                <div class="animate-pulse bg-white rounded-lg shadow-md p-4">
+                    <div class="bg-gray-300 h-48 rounded-md mb-4"></div>
+                    <div class="bg-gray-300 h-6 rounded w-3/4 mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-1/2 mb-4"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-3/4 mb-4"></div>
+                    <div class="bg-gray-300 h-10 rounded w-full"></div>
+                </div>
+                <div class="animate-pulse bg-white rounded-lg shadow-md p-4">
+                    <div class="bg-gray-300 h-48 rounded-md mb-4"></div>
+                    <div class="bg-gray-300 h-6 rounded w-3/4 mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-1/2 mb-4"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-3/4 mb-4"></div>
+                    <div class="bg-gray-300 h-10 rounded w-full"></div>
+                </div>
+                <div class="animate-pulse bg-white rounded-lg shadow-md p-4">
+                    <div class="bg-gray-300 h-48 rounded-md mb-4"></div>
+                    <div class="bg-gray-300 h-6 rounded w-3/4 mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-1/2 mb-4"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-3/4 mb-4"></div>
+                    <div class="bg-gray-300 h-10 rounded w-full"></div>
+                </div>
+            </div>
+            <div class="text-center mt-10">
+                <a href="courses.html" class="inline-block bg-primary text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-600 transition">View All Courses</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-12">
+            <h2 class="text-3xl font-bold text-center mb-12">Why Choose Growth Lab?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Expert Instructors</h3>
+                    <p class="text-gray-600">Learn from industry professionals with years of experience in their fields.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Practical Skills</h3>
+                    <p class="text-gray-600">Gain hands-on experience with real-world projects and exercises.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Recognized Certification</h3>
+                    <p class="text-gray-600">Earn certificates that are valued by employers worldwide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16">
+        <div class="container mx-auto px-12">
+            <h2 class="text-3xl font-bold text-center mb-12">What Our Students Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="testimonials">
+                <!-- Testimonials will be loaded here -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Student" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Sarah Johnson</h4>
+                            <p class="text-gray-600 text-sm">Web Development Student</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"The courses on Growth Lab helped me transition from a marketing role to a full-stack developer position in just 6 months. The instructors are amazing and the content is top-notch!"</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Student" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Michael Chen</h4>
+                            <p class="text-gray-600 text-sm">Data Science Student</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"I've taken several data science courses, and Growth Lab offers the most comprehensive curriculum. The projects are challenging and relevant to real-world scenarios."</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Student" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Emily Rodriguez</h4>
+                            <p class="text-gray-600 text-sm">UX Design Student</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"The UX Design course completely transformed my portfolio. I received job offers from three different companies within weeks of completing the course!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 bg-gradient-to-r from-blue-500 to-blue-700 text-white">
+        <div class="container mx-auto px-12 text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to Start Learning?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of students who are already advancing their careers with Growth Lab courses.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="courses.html" class="bg-white text-blue-600 px-6 py-3 rounded-md font-semibold hover:bg-gray-100 transition">Explore Courses</a>
+                <a href="register.html" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-md font-semibold hover:bg-white hover:text-blue-600 transition">Sign Up Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Growth Lab</h3>
+                    <p class="text-gray-400 mb-4">Empowering individuals to master new skills and advance their careers through quality education.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="courses.html" class="text-gray-400 hover:text-white transition">Courses</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Course Categories</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Web Development</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Data Science</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Mobile Development</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">UX/UI Design</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2"></i>
+                            <span>123 Education St, Learning City, 10001</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <span>info@growthlab.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 Growth Lab. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Dropdown menu toggle
+        const dropdownButton = document.getElementById('dropdown-button');
+        const dropdownMenu = document.getElementById('dropdown-menu');
+
+        if (dropdownButton) {
+            dropdownButton.addEventListener('click', () => {
+                dropdownMenu.classList.toggle('hidden');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (event) => {
+                const container = document.getElementById('dropdown-container');
+                if (container && !container.contains(event.target)) {
+                    dropdownMenu.classList.add('hidden');
+                }
+            });
+        }
+
+        // Load featured courses
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const courses = await fetchCourses();
+                displayFeaturedCourses(courses.slice(0, 3));
+                checkAuthStatus();
+            } catch (error) {
+                console.error('Error loading featured courses:', error);
+            }
+        });
+
+        function displayFeaturedCourses(courses) {
+            const container = document.getElementById('featured-courses');
+            container.innerHTML = '';
+
+            courses.forEach(course => {
+                container.innerHTML += `
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <img src="https://source.unsplash.com/random/800x600/?course,${course.Title.replace(' ', ',')}" alt="${course.Title}" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">${course.Title}</h3>
+                            <p class="text-gray-500 mb-4">By ${course.Instructor.username}</p>
+                            <p class="text-gray-700 mb-4">${course.Description.substring(0, 100)}...</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold">$${course.Price}</span>
+                                <a href="course-detail.html?id=${course.id}" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>

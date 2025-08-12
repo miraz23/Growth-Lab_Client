@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - Growth Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-12 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-primary">Growth Lab</a>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-dark hover:text-primary transition">Home</a>
+                    <a href="courses.html" class="text-primary font-medium transition">Courses</a>
+                    <a href="contact.html" class="text-dark hover:text-primary transition">Contact</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-4" id="auth-buttons">
+                    <a href="login.html" class="text-dark hover:text-primary transition">Login</a>
+                    <a href="register.html" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">Register</a>
+                </div>
+                <div class="hidden items-center space-x-4" id="user-menu">
+                    <div class="relative" id="dropdown-container">
+                        <button id="dropdown-button" class="flex items-center space-x-1">
+                            <span id="username">User</span>
+                            <i class="fas fa-chevron-down text-sm"></i>
+                        </button>
+                        <div id="dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden">
+                            <a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                            <a href="instructor-dashboard.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" id="instructor-link">Instructor Dashboard</a>
+                            <a href="#" id="logout-button" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <button class="md:hidden" id="mobile-menu-button">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            <div class="md:hidden hidden" id="mobile-menu">
+                <div class="flex flex-col space-y-3 py-3">
+                    <a href="index.html" class="text-dark hover:text-primary transition">Home</a>
+                    <a href="courses.html" class="text-primary font-medium transition">Courses</a>
+                    <a href="contact.html" class="text-dark hover:text-primary transition">Contact</a>
+                    <div id="mobile-auth-buttons">
+                        <a href="login.html" class="block text-dark hover:text-primary transition mb-2">Login</a>
+                        <a href="register.html" class="block bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600 transition w-full text-center">Register</a>
+                    </div>
+                    <div id="mobile-user-menu" class="hidden">
+                        <a href="profile.html" class="block text-dark hover:text-primary transition">Profile</a>
+                        <a href="instructor-dashboard.html" class="block text-dark hover:text-primary transition" id="mobile-instructor-link">Instructor Dashboard</a>
+                        <a href="#" id="mobile-logout-button" class="block text-dark hover:text-primary transition">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-12">
+        <div class="container mx-auto px-12 text-center">
+            <h1 class="text-4xl font-bold mb-4">Explore Our Courses</h1>
+            <p class="text-xl max-w-2xl mx-auto">Discover a wide range of courses taught by expert instructors to help you achieve your goals.</p>
+        </div>
+    </section>
+
+    <!-- Search and Filter -->
+    <section class="py-8 bg-white shadow-md">
+        <div class="container mx-auto px-12">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="relative flex-grow max-w-md">
+                    <input type="text" id="search-input" placeholder="Search courses..." class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                    <button id="search-button" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <select id="sort-select" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option value="default">Sort By</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="title-asc">Title: A-Z</option>
+                        <option value="title-desc">Title: Z-A</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Grid -->
+    <section class="py-16">
+        <div class="container mx-auto px-12">
+            <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Course cards will be loaded here -->
+                <div class="animate-pulse bg-white rounded-lg shadow-md p-4">
+                    <div class="bg-gray-300 h-48 rounded-md mb-4"></div>
+                    <div class="bg-gray-300 h-6 rounded w-3/4 mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-1/2 mb-4"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-3/4 mb-4"></div>
+                    <div class="bg-gray-300 h-10 rounded w-full"></div>
+                </div>
+                <div class="animate-pulse bg-white rounded-lg shadow-md p-4">
+                    <div class="bg-gray-300 h-48 rounded-md mb-4"></div>
+                    <div class="bg-gray-300 h-6 rounded w-3/4 mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-1/2 mb-4"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-3/4 mb-4"></div>
+                    <div class="bg-gray-300 h-10 rounded w-full"></div>
+                </div>
+                <div class="animate-pulse bg-white rounded-lg shadow-md p-4">
+                    <div class="bg-gray-300 h-48 rounded-md mb-4"></div>
+                    <div class="bg-gray-300 h-6 rounded w-3/4 mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-1/2 mb-4"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-3/4 mb-4"></div>
+                    <div class="bg-gray-300 h-10 rounded w-full"></div>
+                </div>
+                <div class="animate-pulse bg-white rounded-lg shadow-md p-4">
+                    <div class="bg-gray-300 h-48 rounded-md mb-4"></div>
+                    <div class="bg-gray-300 h-6 rounded w-3/4 mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-1/2 mb-4"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-3/4 mb-4"></div>
+                    <div class="bg-gray-300 h-10 rounded w-full"></div>
+                </div>
+                <div class="animate-pulse bg-white rounded-lg shadow-md p-4">
+                    <div class="bg-gray-300 h-48 rounded-md mb-4"></div>
+                    <div class="bg-gray-300 h-6 rounded w-3/4 mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-1/2 mb-4"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-3/4 mb-4"></div>
+                    <div class="bg-gray-300 h-10 rounded w-full"></div>
+                </div>
+                <div class="animate-pulse bg-white rounded-lg shadow-md p-4">
+                    <div class="bg-gray-300 h-48 rounded-md mb-4"></div>
+                    <div class="bg-gray-300 h-6 rounded w-3/4 mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-1/2 mb-4"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-full mb-2"></div>
+                    <div class="bg-gray-300 h-4 rounded w-3/4 mb-4"></div>
+                    <div class="bg-gray-300 h-10 rounded w-full"></div>
+                </div>
+            </div>
+            <div id="no-courses" class="hidden text-center py-8">
+                <p class="text-xl text-gray-600">No courses found matching your search criteria.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Growth Lab</h3>
+                    <p class="text-gray-400 mb-4">Empowering individuals to master new skills and advance their careers through quality education.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="courses.html" class="text-gray-400 hover:text-white transition">Courses</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Course Categories</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Web Development</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Data Science</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Mobile Development</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">UX/UI Design</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2"></i>
+                            <span>123 Education St, Learning City, 10001</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <span>info@growthlab.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 Growth Lab. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Dropdown menu toggle
+        const dropdownButton = document.getElementById('dropdown-button');
+        const dropdownMenu = document.getElementById('dropdown-menu');
+
+        if (dropdownButton) {
+            dropdownButton.addEventListener('click', () => {
+                dropdownMenu.classList.toggle('hidden');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (event) => {
+                const container = document.getElementById('dropdown-container');
+                if (container && !container.contains(event.target)) {
+                    dropdownMenu.classList.add('hidden');
+                }
+            });
+        }
+
+        // Load courses
+        let allCourses = [];
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                allCourses = await fetchCourses();
+                displayCourses(allCourses);
+                checkAuthStatus();
+                setupSearchAndFilters();
+            } catch (error) {
+                console.error('Error loading courses:', error);
+            }
+        });
+
+        function displayCourses(courses) {
+            const container = document.getElementById('courses-grid');
+            const noCourses = document.getElementById('no-courses');
+            
+            container.innerHTML = '';
+            
+            if (courses.length === 0) {
+                container.classList.add('hidden');
+                noCourses.classList.remove('hidden');
+                return;
+            }
+            
+            container.classList.remove('hidden');
+            noCourses.classList.add('hidden');
+
+            courses.forEach(course => {
+                container.innerHTML += `
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <img src="https://source.unsplash.com/random/800x600/?course,${course.Title.replace(' ', ',')}" alt="${course.Title}" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">${course.Title}</h3>
+                            <p class="text-gray-500 mb-4">By ${course.Instructor.username}</p>
+                            <p class="text-gray-700 mb-4">${course.Description.substring(0, 100)}...</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold">$${course.Price}</span>
+                                <a href="course-detail.html?id=${course.id}" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function setupSearchAndFilters() {
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            const sortSelect = document.getElementById('sort-select');
+
+            // Search functionality
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const filteredCourses = allCourses.filter(course => 
+                    course.Title.toLowerCase().includes(searchTerm) || 
+                    course.Description.toLowerCase().includes(searchTerm)
+                );
+                displayCourses(sortCourses(filteredCourses, sortSelect.value));
+            }
+
+            searchButton.addEventListener('click', performSearch);
+            searchInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+
+            // Sort functionality
+            function sortCourses(courses, sortOption) {
+                const sortedCourses = [...courses];
+                
+                switch(sortOption) {
+                    case 'price-low':
+                        return sortedCourses.sort((a, b) => parseFloat(a.Price) - parseFloat(b.Price));
+                    case 'price-high':
+                        return sortedCourses.sort((a, b) => parseFloat(b.Price) - parseFloat(a.Price));
+                    case 'title-asc':
+                        return sortedCourses.sort((a, b) => a.Title.localeCompare(b.Title));
+                    case 'title-desc':
+                        return sortedCourses.sort((a, b) => b.Title.localeCompare(a.Title));
+                    default:
+                        return sortedCourses;
+                }
+            }
+
+            sortSelect.addEventListener('change', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                let filteredCourses = allCourses;
+                
+                if (searchTerm) {
+                    filteredCourses = allCourses.filter(course => 
+                        course.Title.toLowerCase().includes(searchTerm) || 
+                        course.Description.toLowerCase().includes(searchTerm)
+                    );
+                }
+                
+                displayCourses(sortCourses(filteredCourses, sortSelect.value));
+            });
+        }
+    </script>
+</body>
+</html>
